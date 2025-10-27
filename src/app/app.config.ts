@@ -1,12 +1,19 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
-
-import { routes } from './app.routes';
-
+import {
+  ApplicationConfig,
+  provideBrowserGlobalErrorListeners,
+  provideZoneChangeDetection,
+} from '@angular/core';
+import { provideState, provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import { usersFeature } from './store/user/user.reducer';
+import { loadUsers$, loadOrdersForSelectedUser$ } from './store/user/user.effects';
+import { ordersReducer } from './store/order/order.reducer';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes)
-  ]
+    provideStore({ orders: ordersReducer }),
+    provideState(usersFeature),
+    provideEffects({ loadUsers$, loadOrdersForSelectedUserEffect: loadOrdersForSelectedUser$ }),
+  ],
 };

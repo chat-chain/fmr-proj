@@ -1,0 +1,25 @@
+<div class="selected-user-info">
+  <h2>Selected User: {{ selectSelectedUserSummary().name }}</h2>
+
+  <div class="summary">
+    <p><strong>User Name:</strong> {{ selectSelectedUserSummary().name }}</p>
+    <p><strong>Total Orders Amount:</strong> {{ selectedUserOrders().length }}</p>
+  </div>
+
+  <h3>Orders</h3>
+  @if (selectedUserOrders().length === 0) {
+  <p>No orders for this user</p>
+  } @else {
+  <ul class="orders-list">
+    @for (order of selectedUserOrders(); track order.id) {
+    <li class="order-item">
+      <span><strong>Order ID:</strong> {{ order.id }}</span>
+      <span><strong>Total:</strong> {{ order.total }}</span>
+    </li>
+    }
+    <p>Sum: {{ selectSelectedUserSummary().total }}</p>
+  </ul>
+  }
+
+  <button (click)="unsetUser()" class="clear-btn">Clear Selection</button>
+</div>
