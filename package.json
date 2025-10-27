@@ -2,8 +2,7 @@
   "name": "fmr-proj",
   "version": "0.0.0",
   "scripts": {
-    "build:pages": "ng build --configuration production --base-href /fmr-proj/",
-    "deploy": "npm run build:pages && npx angular-cli-ghpages --dir=dist/fmr-proj",
+    "deploy-ghpages": "npx angular-cli-ghpages --dir=dist/fmr-proj/browser --no-silent",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
